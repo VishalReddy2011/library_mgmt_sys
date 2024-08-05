@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../../../static/general_page.css">
+    <title>Document</title>
+</head>
+<body>
+    <div class="main">
+        <div class="fav">ReadMore</div>
+        <div class="nav">
+            <ul class="moveright">
+                <li> <a href="{{url_for('user_dash',u_name=username)}}">Dashboard</a></li>
+                <li><a href="{{url_for('browse',u_name=username)}}">Browse</a></li>
+                <li><a href="{{url_for('user_statistics',u_name=username)}}">Statistics</a></li>
+                <li><a href="{{url_for('user_search',u_name=username)}}">Search</a></li>
+                <li><a href="{{url_for('login')}}">Logout</a></li>
+            </ul>
+        </div>
+        <div class="heading">Search Catalogue</div>
+        <form method="POST">
+        <table>
+            <tr>
+                <td>Search Section: </td>
+                <td><input type="text" name="section" placeholder="Enter section"></td>
+            </tr>
+            <tr>
+                <td>Search Book Title: </td>
+                <td><input type="text" name="book_title" placeholder="Enter book title"></td>
+            </tr>
+            <tr>
+                <td>Search Author Name: </td>
+                <td><input type="text" name="author_name" placeholder="Enter author name"></td>
+            </tr>
+        </table>
+        <div class="btn"><input type="submit" action="search" value="Search"></div>
+        </form>
+        {%if st %}
+        <div class="heading">Sections</div>
+        <table>
+            <tr>
+                <th>Section Name</th>
+            </tr>
+            {%for section in sections%}
+            <tr>
+                <td><a href="{{url_for('user_section_page',u_name=username,s_name=section.name)}}">{{section.name}}</a></td>
+            </tr>
+            {%endfor%}
+        </table>
+        {%endif%}
+        {%if bt %}
+        <div class="heading">Books</div>
+        <table>
+            <tr>
+                <th>Book Title</th>
+                <th>Author</th>
+                <th>Section</th>
+            </tr>
+            {%for book in books%}
+            <tr>
+                <td><a href="{{url_for('user_book_page',u_name=username,s_name=book.section.name,b_id=book.id)}}">{{book.name}}</a></td>
+                <td>{{book.author.name}}</td>
+                <td>{{book.section.name}}</td>
+            </tr>
+            {%endfor%}
+        </table>
+        {%endif%} 
+        {%if at %}
+        <div class="heading">Author Search</div>
+        <table>
+            <tr>
+                <th>Book Title</th>
+                <th>Author</th>
+                <th>Section</th>
+            </tr>
+            {%for book in books%}
+            <tr>
+                <td><a href="{{url_for('user_book_page',u_name=username,s_name=book.section.name,b_id=book.id)}}">{{book.name}}</a></td>
+                <td>{{book.author.name}}</td>
+                <td>{{book.section.name}}</td>
+            </tr>
+            {%endfor%}
+        </table>
+        {%endif%} 
+        <div class="heading">Latest Books</div>
+        <table>
+            <tr>
+                <th>Book Title</th>
+                <th>Author</th>
+                <th>Section</th>
+            </tr>
+            {%for book in lbooks%}
+            <tr>
+                <td><a href="{{url_for('user_book_page',u_name=username,s_name=book.section.name,b_id=book.id)}}">{{book.name}}</a></td>
+                <td>{{book.author.name}}</td>
+                <td>{{book.section.name}}</td>
+            </tr>
+            {%endfor%}
+        </table>
+    </div>
+</body>
+</html>

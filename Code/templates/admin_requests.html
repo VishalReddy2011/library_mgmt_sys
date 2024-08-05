@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../../static/general_page.css">
+    <title>Requests</title>
+</head>
+<body>
+    <div class="main">
+        <div class="fav">ReadMore</div>
+        <div class="nav">
+            <ul class="moveright">
+                <li><a href="{{url_for('admin_dash')}}">Dashboard</a></li>
+                <li><a href="{{url_for('admin_sections')}}">Sections</a></li>
+                <li><a href="{{url_for('admin_requests')}}">Requests</a></li>
+                <li><a href="{{url_for('search')}}">Search</a></li>
+                <li><a href="{{url_for('login')}}">Logout</a></li>
+            </ul>
+        </div>
+        <div class="heading">Pending Requests</div>
+        <table>
+            <tr>
+                <th>Username</th>
+                <th>Book Name</th>
+                <th>Author</th>
+                <th>Section</th>
+                <th>Available Copies</th>
+                <th>Action</th>
+            </tr>
+            {%for request in requests%}
+            {%if request.status=="pending"%}
+            <tr>
+                {%set avail_copies=available_copies(request.book)%}
+                <td>{{request.user.username}}</td>
+                <td>{{request.book.name}}</td>
+                <td>{{request.book.author.name}}</td>
+                <td>{{request.book.section.name}}</td>
+                <td>{{avail_copies}}/{{request.book.total_copies}}</td>
+                <td>
+                    <form method="POST">
+                        {%if avail_copies!=0 %}
+                        <input name="{{request.id}}" type="submit" value="Grant">
+                        {%endif%}
+                        <input name="{{request.id}}" type="submit" value="Revoke">
+                    </form>
+                </td>
+            </tr>
+            {%endif%}
+            {%endfor%}
+            
+        </table>
+        <div class="heading">Active Requests</div>
+        <table>
+            <tr>
+                <th>Username</th>
+                <th>Book Name</th>
+                <th>Author</th>
+                <th>Section</th>
+                <th>Available Copies</th>
+                <th>Action</th>
+            </tr>
+            {%for request in requests%}
+            {%if request.status=="active"%}
+            <tr>
+                {%set avail_copies=available_copies(request.book)%}
+                <td>{{request.user.username}}</td>
+                <td>{{request.book.name}}</td>
+                <td>{{request.book.author.name}}</td>
+                <td>{{request.book.section.name}}</td>
+                <td>{{avail_copies}}/{{request.book.total_copies}}</td>
+                <td>
+                    <form method="POST">
+                        <input name="{{request.id}}" type="submit" value="Revoke">
+                    </form>
+                </td>
+            </tr>
+            {%endif%}
+            {%endfor%}
+        </table>
+    </div>
+</body>
+</html>

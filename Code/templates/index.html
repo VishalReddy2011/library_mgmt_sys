@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../static/login.css" type="text/css"/>
+    <title>Login Page</title>
+</head>
+<body>
+    <div id="main">
+        <div id="title">
+            <h1>Welcome to ReadMore!</h1>
+        </div>
+        <form method="POST">
+            <table>
+                <tr>
+                    <td text-align="right"><label for="username">Username:</label></td>
+                    <td text-align="left"><input type="text" placeholder="Enter username" name="username"/></td>
+                </tr>
+                <tr>
+                    <td text-align="right"><label for="password">Password:</label></td>
+                    <td text-align="left"><input type="password" placeholder="Enter password" name="password"></td>
+                </tr>
+            </table>
+            <div class="buttons">
+                <button type="submit" name="action" value="Login">Login</button>
+                <button type="submit" name="action" value="Register">Register</button>
+            </div>
+            <div class="message">
+                <p id="error"><b>{{Error}}</b></p>
+                <p id="success"><b>{{Success}}</b></p>
+            </div>
+        </form>
+    </div>
+
+</body>
+</html>

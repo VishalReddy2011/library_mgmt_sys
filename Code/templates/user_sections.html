@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../../static/general_page.css">
+    <title>Document</title>
+</head>
+<body>
+    <div class="main">
+        <div class="nav">
+            <ul class="moveright">
+                <li> <a href="{{url_for('user_dash',u_name=username)}}">Dashboard</a></li>
+                <li><a href="{{url_for('browse',u_name=username)}}">Browse</a></li>
+                <li><a href="{{url_for('user_statistics',u_name=username)}}">Statistics</a></li>
+                <li><a href="{{url_for('user_search',u_name=username)}}">Search</a></li>
+                <li><a href="{{url_for('login')}}">Logout</a></li>
+            </ul>
+        </div>
+        <div class="heading"><u>Sections</u></div>
+        <div id="sections">
+            <table class="sections_table">
+                <tr>
+                    <th id="section_name_head">Section Name</th>
+                    <th id="section_desc_head">Description</th>
+                    <th id="section_date_added">Date Added</th>
+                </tr>
+            {% for section in sections %}
+                <tr class="section_rows">
+                    <td class="section_name"><a href="{{url_for('user_section_page',u_name=username,s_name=section.name)}}">{{section.name}}</a></td>
+                    <td class="section_desc">{{section.description}}</td>
+                    <td class="section_date">{{section.date_created}}</td>
+                </tr>
+            {% endfor %}
+            </table>
+        </div>
+    </div>
+</body>
+</html>

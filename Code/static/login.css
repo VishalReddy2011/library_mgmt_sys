@@ -1,0 +1,42 @@
+#main{
+    background-color: lightblue;
+    width:500px;
+    margin: 0 auto;
+    margin-top: 150px;
+    text-align: center;
+    border-style: ridge;
+    border-width: 10px;
+    border-radius: 25px;
+}
+#title{
+    font-family: Arial;
+    font-size: large;
+}
+
+label{
+    font-family: Arial;
+    font-size:larger;
+    padding-right: 10px;
+}
+
+button{
+    background-color: lightgreen;
+    font-size: medium;
+}
+
+input {
+    height: 20px;
+}
+
+table {
+    margin: auto;
+    padding-bottom: 10px;
+}
+
+#error {
+    color: red;
+}
+
+#success {
+    color: green;
+}

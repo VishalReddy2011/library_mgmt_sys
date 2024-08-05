@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../../../static/general_page.css">
+    <title>Document</title>
+</head>
+<body>
+    <div class="main">
+        <div class="fav">ReadMore</div>
+        <div class="nav">
+            <ul class="moveright">
+                <li><a href="{{url_for('admin_dash')}}">Dashboard</a></li>
+                <li><a href="{{url_for('admin_sections')}}">Sections</a></li>
+                <li><a href="{{url_for('admin_requests')}}">Requests</a></li>
+                <li><a href="{{url_for('search')}}">Search</a></li>
+                <li><a href="{{url_for('login')}}">Logout</a></li>
+            </ul>
+        </div>
+        <div class="book_table">
+            <form method="POST">
+                <table>
+                    <tr>
+                        <td>Book title: </td>
+                        <td><input type="text" name="title" value="{{book['name']}}"></td>
+                    </tr>
+                    <tr>
+                        <td>Author: </td>
+                        <td><input type="text" name="author" value="{{book.author.name}}"></td>
+                    </tr>
+                    <tr>
+                        <td>Section: </td>
+                        <td><input type="text" name="section" value="{{book.section.name}}"></td>
+                    </tr>
+                    <tr>
+                        <td>Available Copies: </td>
+                        <td><input type="text" name="tot_copies" value="{{book['total_copies']}}"></td>
+                    </tr>
+                    <tr>
+                        <td><input type="submit" name="action" value="Edit book"></td>
+                        <td><input type="submit" name="action" value="Delete Book"></td>
+                    </tr>
+                </table>
+                <div class="side">Content: <b></p></div>
+                <textarea name="content" rows="4" cols="175">{{book.content}}</textarea>
+
+            </form>
+            
+        </div>
+    </div>
+</body>
+</html>

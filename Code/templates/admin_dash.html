@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+    <link rel="stylesheet" href="../static/general_page.css">
+</head>
+<body>
+    <div class="main">
+        <div class="fav">ReadMore</div>
+        <div class="nav">
+            <ul class="moveright">
+                <li><a href="{{url_for('admin_dash')}}">Dashboard</a></li>
+                <li><a href="{{url_for('admin_sections')}}">Sections</a></li>
+                <li><a href="{{url_for('admin_requests')}}">Requests</a></li>
+                <li><a href="{{url_for('search')}}">Search</a></li>
+                <li><a href="{{url_for('login')}}">Logout</a></li>
+            </ul>
+        </div>
+        <div class="welcome-text">
+            Welcome {{username}} !
+        </div>
+        <div class="heading"><u>Statistics</u></div>
+        <table width="100%">
+            <tr>
+                <td align="right"><img src="../static/amonth.jpg" alt="books_issued_by_month"></td>
+                <td align="left"><img src="../static/asection.jpg" alt="sections_dist"></td>
+            </tr>
+        </table>
+    </div>
+</body>
+</html>

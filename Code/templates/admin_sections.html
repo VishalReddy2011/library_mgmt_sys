@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../static/general_page.css">
+    <title>Admin Dashboard</title>
+</head>
+<body>
+
+    <div class="main">
+        <div class="fav">ReadMore</div>
+        <div class="nav">
+            <ul class="moveright">
+                <li><a href="{{url_for('admin_dash')}}">Dashboard</a></li>
+                <li><a href="{{url_for('admin_sections')}}">Sections</a></li>
+                <li><a href="{{url_for('admin_requests')}}">Requests</a></li>
+                <li><a href="{{url_for('search')}}">Search</a></li>
+                <li><a href="{{url_for('login')}}">Logout</a></li>
+            </ul>
+        </div>
+        <div class="heading"><u>Sections</u></div>
+        <div id="sections">
+            <table class="sections_table">
+                <tr>
+                    <th id="section_name_head">Section Name</th>
+                    <th id="section_desc_head">Description</th>
+                    <th id="section_date_added">Date Added</th>
+                </tr>
+            {% for section in sections %}
+                <tr class="section_rows">
+                    <td class="section_name"><a href="{{url_for('section_page',s_name=section.name)}}">{{section.name}}</a></td>
+                    <td class="section_desc">{{section.description}}</td>
+                    <td class="section_date">{{section.date_created}}</td>
+                </tr>
+            {% endfor %}
+            </table>
+        </div>
+        <div class="heading">Add Section</div>
+        <div class="form">
+            <form method="POST">
+                <table id="info">
+                    <tr>
+                        <td text-align="right"><label for="section_name">Name: </label></td>
+                        <td text-align="left"><input type="text" name="section_name" placeholder="Enter section name"></td>
+                    </tr>
+                    <tr>
+                        <td text-align="right"><label for="section_desc">Description: </label></td>
+                        <td text-align="left"><textarea id="section_desc" name="section_desc" rows="4" cols="50" placeholder="Enter description"></textarea></td>
+                    </tr>
+                </table>
+                <div class="btn">
+                    <input type="submit" name="action" value="Create Section">
+                </div>
+                
+            </form>
+        </div>
+            
+    </div>
+    
+</body>
+</html>

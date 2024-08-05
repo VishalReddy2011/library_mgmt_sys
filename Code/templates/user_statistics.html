@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../../static/general_page.css">
+    <title>Document</title>
+</head>
+<body>
+    <div class="fav">ReadMore</div>
+        <div class="nav">
+            <ul class="moveright">
+                <li> <a href="{{url_for('user_dash',u_name=username)}}">Dashboard</a></li>
+                <li><a href="{{url_for('browse',u_name=username)}}">Browse</a></li>
+                <li><a href="{{url_for('user_statistics',u_name=username)}}">Statistics</a></li>
+                <li><a href="{{url_for('user_search',u_name=username)}}">Search</a></li>
+                <li><a href="{{url_for('login')}}">Logout</a></li>
+            </ul>
+        </div>
+        <div class="heading">Statistics</div>
+        <table width="100%">
+            <tr>
+                <td align="right"><img src="../static/umonth.jpg" alt="books_issued_by_month"></td>
+                <td align="left"><img src="../static/usection.jpg" alt="sections_dist"></td>
+            </tr>
+        </table>
+</body>
+</html>

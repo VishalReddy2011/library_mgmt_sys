@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../../../static/general_page.css">
+    <title>Browse Library</title>
+</head>
+<body>
+    <div class="main">
+        <div class="fav">ReadMore</div>
+        <div class="nav">
+            <ul class="moveright">
+                <li> <a href="{{url_for('user_dash',u_name=username)}}">Dashboard</a></li>
+                <li><a href="{{url_for('browse',u_name=username)}}">Browse</a></li>
+                <li><a href="{{url_for('user_statistics',u_name=username)}}">Statistics</a></li>
+                <li><a href="{{url_for('user_search',u_name=username)}}">Search</a></li>
+                <li><a href="{{url_for('login')}}">Logout</a></li>
+            </ul>
+        </div>
+        <div class="heading">Book Information</div>
+        <div class="book_table">
+            <table>
+                <tr>
+                    <td>Book title: </td>
+                    <td>{{book.name}}</td>
+                </tr>
+                <tr>
+                    <td>Author: </td>
+                    <td>{{book.author.name}}</td>
+                </tr>
+                <tr>
+                    <td>Section: </td>
+                    <td>{{book.section.name}}</td>
+                </tr>
+                <tr>
+                    <td>Available Copies: </td>
+                    {%set avail_copies=available_copies(book)%}
+                    <td>{{avail_copies}}/{{book.total_copies}}</td>
+                </tr>
+                <tr>
+                    <td>Status: </td>
+                    <td>{{status}}</td>
+                </tr>
+            </table>
+        </div>
+        {%if issue=="show_request"%}
+        <div class="button">
+            <form method="POST">
+                <div class="btn"><input type="submit" name="action" value="Request"></div>
+            </form>
+        </div>
+        {%endif%}
+        <div class="msg">{{msg}}</div>
+        {%if issue=="show_content"%}
+        <div class="button">
+            <form method="POST">
+                <div class="btn"><input type="submit" name="action" value="Return"></div>
+            </form>
+        </div>
+        <div class="content">
+            <p>{{book.content}}</p>
+        </div>
+        {%endif%}
+        {%if status=="You have finished reading this book"%}
+        <div class="feedback-form">
+            <form method="POST">
+                <table>
+                    <tr>
+                        <td>Feedback:</td>
+                        <td><textarea id="feedback" name="feedback" rows="4" cols="50"></textarea><br></td>
+                    </tr>
+                    <tr>
+                        <td>Rating:</td>
+                        <td><input type="number" name="rating" min="1" max="5"></td>
+                    </tr>
+                </table>
+                <div class="btn"><input type="submit" name="action" value="Submit"></div>
+            </form>
+        </div>
+        <div class="message">{{msg}}</div>
+        {%endif%}
+        <div class="heading">Feedback</div>
+        
+        <table>
+            <tr>
+                <th>Username</th>
+                <th>Date</th>
+                <th>Rating (out of 5)</th>
+                <th>Feedback</th>
+            </tr>
+            {%for f in feedback%}
+            <tr>
+                <td>{{f.user.username}}</td>
+                <td>{{f.date}}</td>
+                <td>{{f.rating}}</td>
+                <td>{{f.text}}</td>
+            </tr>
+            {%endfor%}
+        </table>
+        
+    </div>
+</body>
+</html>

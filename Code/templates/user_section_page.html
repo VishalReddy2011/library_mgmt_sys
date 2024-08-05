@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../../static/general_page.css">
+    <title>Browse Library</title>
+</head>
+<body>
+    <div class="main">
+        <div class="fav">ReadMore</div>
+        <div class="nav">
+            <ul class="moveright">
+                <li> <a href="{{url_for('user_dash',u_name=username)}}">Dashboard</a></li>
+                <li><a href="{{url_for('browse',u_name=username)}}">Browse</a></li>
+                <li><a href="{{url_for('user_statistics',u_name=username)}}">Statistics</a></li>
+                <li><a href="{{url_for('user_search',u_name=username)}}">Search</a></li>
+                <li><a href="{{url_for('login')}}">Logout</a></li>
+            </ul>
+        </div>
+        <div class="heading">{{section.name}} - Book List</div>
+        <table>
+            <tr>
+                <th>Book Name</th>
+                <th>Author</th>
+                <th>Available Copies</th>
+            </tr>
+        {% for book in section.books %}
+            <tr class="book_rows">
+                <td class="book_name"><a href="{{url_for('user_book_page',s_name=section.name,b_id=book.id,u_name=username)}}">{{book.name}}</a></td>
+                <td class="author">{{book.author.name}}</td>
+                {%set avail_copies=available_copies(book)%}
+                <td class="tot_copies">{{avail_copies}}/{{book.total_copies}}</td>
+            </tr>
+        {% endfor %}
+        </table>
+        
+    </div>
+</body>
+</html>

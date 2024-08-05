@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../../static/general_page.css">
+    <title>User Dashboard</title>
+</head>
+<body>
+    <div class="main">
+        <div class="fav">ReadMore</div>
+        <div class="nav">
+            <ul class="moveright">
+                <li> <a href="{{url_for('user_dash',u_name=username)}}">Dashboard</a></li>
+                <li><a href="{{url_for('browse',u_name=username)}}">Browse</a></li>
+                <li><a href="{{url_for('user_statistics',u_name=username)}}">Statistics</a></li>
+                <li><a href="{{url_for('user_search',u_name=username)}}">Search</a></li>
+                <li><a href="{{url_for('login')}}">Logout</a></li>
+            </ul>
+        </div>
+        <div class="welcome-text">Welcome {{username}} !</div>
+        <div class="heading">Current Issued Books</div>
+        {%set cur_books=current_books(username)%}
+        <table>
+            <tr>
+                <th>Book Name</th>
+                <th>Author</th>
+                <th>Section</th>
+                <th>Expiry</th>
+            </tr>
+            {%for book in cur_books%}
+            <tr>
+                <td><a href="{{url_for('user_book_page',u_name=username,s_name=book[0].section,b_id=book[0].id)}}">{{book[0].name}}</a></td>
+                <td>{{book[0].author.name}}</td>
+                <td>{{book[0].section.name}}</td>
+                <td>{{book[1]}}</td>
+            </tr>
+            {%endfor%}
+        </table>
+        
+        <div class="heading">Pending Requests</div>
+        <table>
+            <tr>
+                <th>Book Name</th>
+                <th>Author</th>
+                <th>Section</th>
+            </tr>
+            {%set pen_books=pending_books(username)%}
+            {%for book in pen_books%}
+            <tr>
+                <td><a href="{{url_for('user_book_page',u_name=username,s_name=book.section,b_id=book.id)}}">{{book.name}}</a></td>
+                <td>{{book.author.name}}</td>
+                <td>{{book.section.name}}</td>
+            </tr>
+            {%endfor%}
+        </table>
+        
+        <div class="heading">Past Books</div>
+        {%set p_books=past_books(username)%}
+        <table>
+            <tr>
+                <th>Book Name</th>
+                <th>Author</th>
+                <th>Section</th>
+                <th>Status</th>
+            </tr>
+            {% for book in p_books%}
+            <tr>
+                <td><a href="{{url_for('user_book_page',u_name=username,s_name=book[0].section,b_id=book[0].id)}}">{{book[0].name}}</a></td>
+                <td>{{book[0].author.name}}</td>
+                <td>{{book[0].section.name}}</td>
+                <td>{{book[1].capitalize()}}</td>
+            </tr>
+            {%endfor%}
+        </table>
+
+    </div>
+</body>
+</html>
